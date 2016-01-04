@@ -1,0 +1,2 @@
+﻿16:20:52,872 DEBUG main MainFrame:createGUI:40 - Start Program
+16:22:07,819 ERROR AWT-EventQueue-0 Task:setTime:51 - Field cannot be null
