@@ -10,15 +10,12 @@ public abstract class TaskIO {
     /**
      * This method should read the task of
      * file and write them in the List.
-     * @param tasks the list for write task
-     * @param file the file for read task
      */
-    abstract public void read(List<Task> tasks, File file);
+    abstract public List<Task> read();
     /**
      * This method should write the task in
      * file and read them in the List.
      * @param tasks the list for read task
-     * @param file the file for write task
      */
-    abstract public void write(List<Task> tasks, File file);
+    abstract public void write(List<Task> tasks);
 }

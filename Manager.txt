@@ -1,2 +1,2 @@
-"Clean" at [2015-12-29 18:47:58.184] inactive;
-"TestAbstractIO" at [2015-12-31 02:58:01.14] inactive.
+"лтт" at [2016-01-09 16:25:17.0] inactive;
+"testTimer" from [2016-01-09 16:05:42.190] to [2016-01-09 16:29:48.0] every [5 seconds] inactive.

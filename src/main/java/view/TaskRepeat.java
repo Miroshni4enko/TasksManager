@@ -46,9 +46,9 @@ public class TaskRepeat extends NewTask {
         JPanel panel = new JPanel(new MigLayout());
         title = new JTextField(15);
         start = new JDateChooser();
-        start.setDateFormatString("yyyy-MM-dd HH:mm:ss.S ");
+        start.setDateFormatString("yyyy-MM-dd HH:mm:ss");
         end = new JDateChooser();
-        end.setDateFormatString("yyyy-MM-dd HH:mm:ss.S");
+        end.setDateFormatString("yyyy-MM-dd HH:mm:ss");
 
         active = new JCheckBox();
         active.addItemListener(new ItemListener() {

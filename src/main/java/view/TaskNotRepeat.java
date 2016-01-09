@@ -31,7 +31,7 @@ public class TaskNotRepeat extends  NewTask {
 
         title = new JTextField(15);
         time = new JDateChooser();
-        time.setDateFormatString("yyyy-MM-dd HH:mm:ss.S");
+        time.setDateFormatString("yyyy-MM-dd HH:mm:ss");
         active = new JCheckBox();
         active.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {

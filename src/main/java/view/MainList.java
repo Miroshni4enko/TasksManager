@@ -32,8 +32,12 @@ public class MainList extends JList {
     public void addTask(Task task){
         listModel.addElement(task.getTitle());
     }
-    public void removeTask(Task task){
-        listModel.removeElement(task.getTitle());
+    public boolean removeTask(Task task){
+        return   listModel.removeElement(task.getTitle());
+    }
+
+    public DefaultListModel getListModel() {
+        return listModel;
     }
 }
 

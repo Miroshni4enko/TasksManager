@@ -5,6 +5,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -13,41 +14,52 @@ public class TextTaskIO extends TaskIO {
     private static final Logger log = Logger.getLogger(TextTaskIO.class);
 
 
-    public  void write(List<Task> tasks, File out) {
-        try( BufferedWriter myfile = new BufferedWriter (new FileWriter(out));) {
-
+    public  void write(List<Task> tasks) {
+        File out = new File("Manager.txt");
+        BufferedWriter writer = null;
+        try { writer = new BufferedWriter (new FileWriter(out));
             DateFormat dateFormat = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss.S]");
             int r = 0,size = tasks.size();
             for (Task t : tasks) {
 
-                myfile.write("\"" + t.getTitle() + "\"");
+                writer.write("\"" + t.getTitle() + "\"");
                 if (t.isRepeated()) {
-                    myfile.write(" from " + dateFormat.format(t.getStartTime()) + " to ");
-                    myfile.write(dateFormat.format(t.getEndTime()));
-                    myfile.write(" every [");
+                    writer.write(" from " + dateFormat.format(t.getStartTime()) + " to ");
+                    writer.write(dateFormat.format(t.getEndTime()));
+                    writer.write(" every [");
                     int i = t.getRepeatInterval();
-                    myfile.write(intervalToStr(i));
-                } else myfile.write(" at " + dateFormat.format(t.getTime()));
+                    writer.write(intervalToStr(i));
+                } else writer.write(" at " + dateFormat.format(t.getTime()));
 
-                if (t.isActive()) myfile.write(" inactive");
-                if (size ==++r) myfile.write(".");
-                else myfile.write(";");
-                myfile.write("\n");
+                if (t.isActive()) writer.write(" inactive");
+                if (size ==++r) writer.write(".");
+                else writer.write(";");
+                writer.write("\n");
             }
         } catch (FileNotFoundException e) {
             log.error("File not found");
         }
          catch (IOException e) {
-            log.error("Error write");
+
+        }
+        finally {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                log.error("Error write file");;
+            }
         }
     }
 
-    public void read(List<Task> tasks, File in) {
-        try( BufferedReader myBuf = new BufferedReader(new FileReader(in));) {
-
+    public List<Task> read() {
+        BufferedReader reader = null;
+        List<Task> tasks = new ArrayList<Task>();
+        File in = new File("Manager.txt");
+        try {
+            reader = new BufferedReader(new FileReader(in));
             String s;
-            while((s = myBuf.readLine()) !=null ){
-                if(s.equals("")) return;
+            while((s = reader.readLine()) !=null ){
+                if(s.equals("")) return null;
                 int f = s.indexOf("\"");
                 int l = s.lastIndexOf("\"");
                 String title = s.substring(f+1,l);
@@ -89,7 +101,14 @@ public class TextTaskIO extends TaskIO {
             log.error("File not found");
         } catch (IOException e) {
             log.error("Eror read file");
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                log.error("Eror read file");
+            }
         }
+        return tasks;
     }
     public static String intervalToStr(int interval){
         int s, m, d, h;
@@ -100,18 +119,27 @@ public class TextTaskIO extends TaskIO {
         } else if (interval >= min && interval < hour) {
             m = interval / min;
             s = (interval % min) / sec;
+            if(interval%min == 0){
+                string = (m + " minutes]");
+            }else
             string = (m + " minutes " + s + " seconds]");
         }else if(interval >= hour && interval < day) {
             h = interval / hour;
             m = (interval % hour)/min;
             s = ((interval % hour) % min) / sec;
+            if(interval%hour == 0){
+                string = (h + " hours]");
+            }else
             string = (h + " hours " + m + " minutes " + s + " seconds]");
         } else{
             d = interval / day;
             h = (interval % day) / hour;
             m = ((interval % day) % hour)/min;
             s = (((interval % day) % hour) % min) / sec;
-            string = (d + " day " +  h + " hours " + m + " minutes " + s + " seconds]");
+            if(interval%day == 0){
+                string = (d + " days]");
+            }else
+            string = (d + " days " +  h + " hours " + m + " minutes " + s + " seconds]");
         }
         return string;
     }

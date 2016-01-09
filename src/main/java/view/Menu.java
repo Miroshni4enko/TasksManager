@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class Menu  extends  JMenuBar{
     private JMenuItem repeat;
     private JMenuItem nrepeat;
-    private JMenuItem exitItem;
+    //private JMenuItem exitItem;
     private JMenuItem calendar;
     private JMenuItem remove;
     private JMenuItem change;
@@ -40,9 +40,9 @@ public class Menu  extends  JMenuBar{
         return nrepeat;
     }
 
-    public JMenuItem getExitItem() {
+    /*public JMenuItem getExitItem() {
         return exitItem;
-    }
+    }*/
 
     public void  setMenu() {
         Font font = new Font("Verdana", Font.PLAIN, 11);
@@ -79,9 +79,14 @@ public class Menu  extends  JMenuBar{
 
         fileMenu.addSeparator();
 
-        exitItem = new JMenuItem("Exit");
+       /* exitItem = new JMenuItem("Exit");
         exitItem.setFont(font);
         fileMenu.add(exitItem);
+        exitItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });*/
 
         this.add(fileMenu);
     }

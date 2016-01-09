@@ -36,11 +36,11 @@ public class TaskChange extends JFrame{
         final JPanel panel = new JPanel(new MigLayout());
         title = new JTextField(task.getTitle(),17);
         time = new JDateChooser(task.getTime());
-        time.setDateFormatString("yyyy-MM-dd HH:mm:ss.S");
+        time.setDateFormatString("yyyy-MM-dd HH:mm:ss");
         start = new JDateChooser(task.getStartTime());
-        start.setDateFormatString("yyyy-MM-dd HH:mm:ss.S");
+        start.setDateFormatString("yyyy-MM-dd HH:mm:ss");
         end = new JDateChooser(task.getEndTime());
-        end.setDateFormatString("yyyy-MM-dd HH:mm:ss.S");
+        end.setDateFormatString("yyyy-MM-dd HH:mm:ss");
         active = new JCheckBox();
         active.setSelected(task.isActive());
         active.addItemListener(new ItemListener() {
