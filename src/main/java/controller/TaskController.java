@@ -3,6 +3,7 @@ package controller;
 import model.*;
 import view.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Слава on 22.12.2015.
@@ -10,9 +11,9 @@ import java.util.*;
 public class TaskController {
     public static void main(String[] args) {
         TaskController controller = new TaskController(new TextTaskIO());
-        controller.createView(SwingTasksView.getFactory());
+        controller.createView(MainFrame.getFactory());
     }
-    private List views = new ArrayList();
+    private List<TasksView> views = new ArrayList<TasksView>();
     private List<Task> tasks;
     private TaskIO taskIO;
 
